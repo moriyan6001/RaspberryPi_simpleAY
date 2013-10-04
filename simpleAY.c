@@ -1,5 +1,6 @@
 #include <wiringPi.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define BYTE unsigned char
 
@@ -94,6 +95,8 @@ void AY_out(int reg, int data)
 	HC595_out(data);
 	AY_write();
 	AY_inactive();
+	// 必要ないかも?
+	usleep(1);
 }
 
 int main(void)
@@ -104,7 +107,7 @@ int main(void)
 		printf("setup error\n");
 		return 1;
 	}
-	printf("setupOK\n");
+	printf("setup OK\n");
 	setPort();
 	delay(100);
 
